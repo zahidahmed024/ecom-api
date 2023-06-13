@@ -40,7 +40,7 @@ app.use(express.static('./public'));
 app.use(fileUpload());
 
 //using app routers
-app.use('/', mainRouter);
+app.use('/api/v1', mainRouter);
 
 app.use(errorHandlerMiddleware);
 

@@ -7,6 +7,7 @@ let server;
 connectDB().then(() => {
     console.log('Connected to MongoDB');
     server = app.listen(db_config.port, () => {
+        console.log('db_config.port', db_config.port)
         // logger.info(`Listening to port ${config.port}`);
     });
 }).catch(e => {

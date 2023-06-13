@@ -7,9 +7,16 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         message: err.message || 'Something went wrong try again later',
     };
     if (err.name === 'ValidationError') {
+        // customError.message = Object.values(err.errors)
+        //     .map((item) => item.message)
+        //     .join(',');
         customError.message = Object.values(err.errors)
-            .map((item) => item.message)
-            .join(',');
+            .map((item) => {
+                return {
+                    [item.path]: item.message
+                }
+            })
+        // .join(',');
         customError.statusCode = 400;
     }
     if (err.code && err.code === 11000) {

@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "cd2f476a-39e7-4500-beb0-49aa5ea3bf44",
+    "name": "ecom-env",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2023-06-13T10:16:46.531Z",
+    "modified": "2023-06-13T10:16:46.531Z",
+    "data": [
+      {
+        "name": "base_url",
+        "value": "http://localhost:3000"
+      }
+    ]
+  }
+]

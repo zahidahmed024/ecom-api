@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "_id": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "colName": "ecom-api",
+    "created": "2023-06-13T10:17:03.665Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "a978b1f1-72d3-4041-bf7a-b8061641730e",
+        "name": "auth",
+        "containerId": "",
+        "created": "2023-06-13T10:17:35.217Z",
+        "sortNum": 10000
+      }
+    ]
+  }
+]
