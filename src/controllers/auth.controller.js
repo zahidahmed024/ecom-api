@@ -2,11 +2,23 @@ const { hash } = require("bcryptjs");
 const { User } = require("../models/User");
 const { authService } = require("../services");
 const { catchAsync } = require("../utils");
+const { string, number, date, object } = require("yup");
 
 
 module.exports.register = catchAsync(async (req, res, next) => {
     let email = req.body?.email || ''
     let password = req.body?.password || ''
+
+    // let userSchema = object({
+    //     name: string().required(),
+    //     age: number().required().positive().integer(),
+    //     password: number().required().positive().integer(),
+    //     email: string().email(),
+    //     website: string().url().nullable(),
+    //     createdOn: date().default(() => new Date()),
+    // });
+
+    // return await userSchema.validate({ email, password })
     // const hashedPassword = await hash(password, salt)
     await User.create({ email, password })
 

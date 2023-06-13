@@ -1,5 +1,5 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
-    console.log(err);
+    // console.log(err);
     let customError = {
         // set default
         success: false,
@@ -7,16 +7,13 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         message: err.message || 'Something went wrong try again later',
     };
     if (err.name === 'ValidationError') {
-        // customError.message = Object.values(err.errors)
-        //     .map((item) => item.message)
-        //     .join(',');
-        customError.message = Object.values(err.errors)
-            .map((item) => {
-                return {
-                    [item.path]: item.message
-                }
+
+        let newFormatedErrors = {}
+        Object.values(err.errors)
+            .forEach((item) => {
+                newFormatedErrors[item.path] = item.message
             })
-        // .join(',');
+        customError.errors = newFormatedErrors
         customError.statusCode = 400;
     }
     if (err.code && err.code === 11000) {
@@ -30,7 +27,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         customError.statusCode = 404;
     }
 
-    return res.status(customError.statusCode).json({ success: customError.success, errors: customError.message });
+    return res.status(customError.statusCode).json(customError);
 };
 
 module.exports = errorHandlerMiddleware;

@@ -4,7 +4,6 @@ const { User } = require("../models/User");
 
 
 exports.createUser = (name = '', email = '', password = '') => {
-    
     try {
         let createdUser = User.create({ email, password, name })
 
