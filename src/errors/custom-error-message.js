@@ -1,8 +1,8 @@
-class CustomApiError extends Error {
+class CustomApiErrorMessage extends Error {
     constructor(statusCode, message) {
         super(message);
         this.statusCode = statusCode;
     }
 }
 
-module.exports = CustomApiError
+module.exports = CustomApiErrorMessage

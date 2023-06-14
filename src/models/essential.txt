@@ -1,0 +1,8 @@
+mongoose pre funcitons 
+
+pre('validate')
+pre('remove')
+pre('findOneAndUpdate')
+pre('findOneAndDelete')
+
+

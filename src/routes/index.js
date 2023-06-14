@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const CustomApiError = require("../errors/custom-error");
+const CustomApiErrorMessage = require("../errors/custom-error-message");
 const { authController } = require("../controllers");
 
 const mainRouter = Router()

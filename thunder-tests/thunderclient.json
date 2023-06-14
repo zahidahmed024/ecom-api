@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-06-13T10:17:45.251Z",
-    "modified": "2023-06-13T11:25:03.209Z",
+    "modified": "2023-06-14T13:42:33.092Z",
     "headers": [],
     "params": [],
     "body": {
@@ -17,15 +17,19 @@
       "form": [
         {
           "name": "email",
-          "value": "asdasf"
+          "value": "zahidhmed02124@gmail.com"
         },
         {
           "name": "password",
-          "value": "fasfasf"
+          "value": "asf"
         },
         {
-          "name": "name",
-          "value": ""
+          "name": "first_name",
+          "value": "fasdas"
+        },
+        {
+          "name": "last_name",
+          "value": "asfasd"
         }
       ]
     },
