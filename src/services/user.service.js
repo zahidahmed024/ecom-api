@@ -25,7 +25,9 @@ const createUser = async (requestBody) => {
     if (!isEmpty(errors)) {
         throw new CustomValidationError(400, errors, 'validation error')
     }
-    const hash = await bcrypt.hash(requestBody.password, 10);
+
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(requestBody.password, salt);
     requestBody.password = hash;
 
     let createdUser = await User.create(requestBody)
@@ -36,6 +38,11 @@ const createUser = async (requestBody) => {
 
 const findUserByEmail = (email) => {
     const user = User.findOne({ email: email })
+    return user;
+};
+
+const findUserById = (userId) => {
+    const user = User.findOne({ id: email })
     return user;
 };
 

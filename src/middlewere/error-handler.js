@@ -1,5 +1,5 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
-    // console.log('errorHandlerMiddleware', err);
+    console.log('errorHandlerMiddleware', err);
     let statusCode = err.statusCode || 500
 
     let customError = {

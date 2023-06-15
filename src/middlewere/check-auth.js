@@ -1,5 +1,5 @@
 const CustomApiErrorMessage = require("../errors/custom-error-message");
-const { verifyJwtToken } = require("../utils/jwt-config")
+const { verifyJwtToken } = require("../services/auth.service");
 
 
 module.exports = async (req, res, next) => {
@@ -18,11 +18,13 @@ module.exports = async (req, res, next) => {
             throw new CustomApiErrorMessage(401, 'token not found!')
         }
 
-        const user_id = verifyJwtToken(token, next)
+        const user_id = verifyJwtToken(token)
+        console.log('check auth called')
         // console.log('access_token middleware', user_id)
-        if (!user_id) {
-            throw new CustomApiErrorMessage(403, 'Invalid access token!')
-        }
+
+        // if (!user_id) {
+        //     throw new CustomApiErrorMessage(403, 'Invalid access token!')
+        // }
 
         req.user_id = user_id
         next()

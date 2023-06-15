@@ -10,6 +10,14 @@
       {
         "name": "base_url",
         "value": "http://localhost:3000"
+      },
+      {
+        "name": "access_token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGFiYTA2NTA3NDRjNjA3NTA3Y2I5YyIsImlhdCI6MTY4NjgzMzM5NSwiZXhwIjoxNjg2ODM1MTk1fQ.HNO3wrI1zFBuFZfZbPA8iMaqjKYkU2DRRxV99Cb3WEY"
+      },
+      {
+        "name": "refresh_token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGFiYTA2NTA3NDRjNjA3NTA3Y2I5YyIsImlhdCI6MTY4NjgzMzM5NSwiZXhwIjoxNjg5NDI1Mzk1fQ.hHFqrY5W4ZKFg_VZLyTlre4B6m_GBYwTax4bEdBq3H8"
       }
     ]
   }

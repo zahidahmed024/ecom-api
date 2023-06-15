@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-06-13T10:17:45.251Z",
-    "modified": "2023-06-14T13:42:33.092Z",
+    "modified": "2023-06-15T07:13:10.987Z",
     "headers": [],
     "params": [],
     "body": {
@@ -17,11 +17,11 @@
       "form": [
         {
           "name": "email",
-          "value": "zahidhmed02124@gmail.com"
+          "value": "zahidhmed@gmail.com"
         },
         {
           "name": "password",
-          "value": "asf"
+          "value": "asdfgh"
         },
         {
           "name": "first_name",
@@ -34,5 +34,95 @@
       ]
     },
     "tests": []
+  },
+  {
+    "_id": "ca71c799-9148-40ed-aa64-385d39793f9c",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "a978b1f1-72d3-4041-bf7a-b8061641730e",
+    "name": "login",
+    "url": "{{base_url}}/api/v1/login",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-06-15T07:12:15.265Z",
+    "modified": "2023-06-15T12:17:03.436Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "zahidhmed@gmail.com"
+        },
+        {
+          "name": "password",
+          "value": "asdfgh"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.access_token",
+        "action": "setto",
+        "value": "{{access_token}}"
+      },
+      {
+        "type": "set-env-var",
+        "custom": "json.data.refresh_token",
+        "action": "setto",
+        "value": "{{refresh_token}}"
+      }
+    ]
+  },
+  {
+    "_id": "7ffe9366-e00f-44bd-b017-8b926fb33d06",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "2b4995e9-d902-4de8-ba4b-078711eb61b6",
+    "name": "user",
+    "url": "{{base_url}}/api/v1/user",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2023-06-15T09:08:58.436Z",
+    "modified": "2023-06-15T09:18:23.571Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "981ac137-c5c0-4cad-b30b-4e7f53aadf25",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "a978b1f1-72d3-4041-bf7a-b8061641730e",
+    "name": "refresh token",
+    "url": "{{base_url}}/api/v1/refresh-token",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-06-15T11:36:12.705Z",
+    "modified": "2023-06-15T12:19:03.156Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "refresh_token",
+          "value": "{{refresh_token}}"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.access_token",
+        "action": "setto",
+        "value": "{{access_token}}"
+      }
+    ]
   }
 ]

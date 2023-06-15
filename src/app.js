@@ -15,7 +15,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 
 //  routers
-const mainRouter = require('./routes/index');
+const { authRouter, mainRouter } = require('./routes/index');
 
 
 // middleware
@@ -40,7 +40,7 @@ app.use(express.static('./public'));
 app.use(fileUpload());
 
 //using app routers
-app.use('/api/v1', mainRouter);
+app.use('/api/v1', [authRouter, mainRouter]);
 
 app.use(errorHandlerMiddleware);
 

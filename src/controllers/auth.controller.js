@@ -5,9 +5,10 @@ const { catchAsync } = require("../utils");
 const { string, number, date, object } = require("yup");
 const { createUser } = require("../services/user.service");
 const CustomApiErrorMessage = require("../errors/custom-error-message");
+const { loginWithEmailAndPassword, verifyJwtToken, createJwtToken } = require("../services/auth.service");
 
 
-module.exports.register = catchAsync(async (req, res, next) => {
+const register = catchAsync(async (req, res, next) => {
 
     let createdUser = await createUser(req.body)
     if (!createdUser) {
@@ -15,18 +16,43 @@ module.exports.register = catchAsync(async (req, res, next) => {
     }
     return res.status(200).send({
         message: 'User Created successfully',
-        data: createdUser,
+        data: null,
         success: true
     })
 
 
 })
 
-exports.login = (payload) => {
-    try {
-        authService.createJwtToken()
+const login = catchAsync(async (req, res, next) => {
+    let email = req.body?.email || ''
+    let password = req.body?.password || ''
+    let { accessToken, refreshToken } = await loginWithEmailAndPassword(email, password)
 
-    } catch (error) {
-        throw new CustomApiErrorMessage(401, 'Unable sign token')
-    }
-};
+    return res.status(200).send({
+        success: true,
+        data: {
+            access_token: accessToken,
+            refresh_token: refreshToken
+        }
+    })
+});
+
+const refreshToken = catchAsync(async (req, res, next) => {
+    let refreshToken = req.body?.refresh_token || ''
+    let { id } = verifyJwtToken(refreshToken)
+    let newJwtToken = createJwtToken({ id })
+
+    return res.status(200).send({
+        success: true,
+        data: {
+            access_token: newJwtToken,
+            // refresh_token: refreshToken
+        }
+    })
+});
+
+module.exports = {
+    register,
+    login,
+    refreshToken
+}
