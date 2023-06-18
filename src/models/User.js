@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const CustomValidationError = require('../errors/custom-validation-error');
-const { string, number, date, object } = require('yup');
+// const CustomValidationError = require('../errors/custom-validation-error');
+// const { string, number, date, object } = require('yup');
+const { toJSON, paginate } = require('./plugins');
 
 
 const userSchema = new mongoose.Schema({
@@ -33,7 +34,9 @@ const userSchema = new mongoose.Schema({
         required: [true, 'password is required'],
         minlength: [5, 'password length must greater than 4'],
         // maxlength: [20, 'password length must less than 21'],
-        trim: true
+        trim: true,
+
+        private: true,  // used by the toJSON plugin
     },
     role: {
         type: String,
@@ -44,35 +47,12 @@ const userSchema = new mongoose.Schema({
     }
 },
     {
-        toJSON: {
-            transform: function (doc, ret) {
-                ret.id = ret._id;
-                delete ret._id;
-                delete ret.__v;
-            },
-        },
+        timestamps: true // Enable timestamps option
     }
 );
+userSchema.plugin(toJSON);
+userSchema.plugin(paginate);
 
-// userSchema.pre('save', async function (next) {
-//     try {
-//         // inputs 
-//         const user = this;
-
-//         let errors = {}
-
-//         const existingUser = await mongoose.models.User.findOne({ email: user.email });
-//         if (existingUser) {
-//             errors.email = 'User with this email already exists';
-//             throw new CustomValidationError(422, errors, 'Email already exists')
-//         }
-
-//         next(); // No validation errors, proceed to next middleware
-//     } catch (err) {
-//         // console.log('error', err)
-//         next(err); // Pass any error to the next middleware
-//     }
-// });
 
 const User = mongoose.model('User', userSchema);
 

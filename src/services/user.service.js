@@ -36,13 +36,13 @@ const createUser = async (requestBody) => {
 };
 
 
-const findUserByEmail = (email) => {
-    const user = User.findOne({ email: email })
+const findUserByEmail = async (email) => {
+    const user = await User.findOne({ email: email })
     return user;
 };
 
-const findUserById = (userId) => {
-    const user = User.findOne({ id: email })
+const findUserById = async (userId) => {
+    const user = await User.findById(userId)
     return user;
 };
 
@@ -52,5 +52,6 @@ const findUserById = (userId) => {
 
 module.exports = {
     findUserByEmail,
-    createUser
+    createUser,
+    findUserById
 }

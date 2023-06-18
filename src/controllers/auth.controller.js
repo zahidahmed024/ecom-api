@@ -1,8 +1,4 @@
-const { hash } = require("bcryptjs");
-const { User } = require("../models/User");
-const { authService } = require("../services");
 const { catchAsync } = require("../utils");
-const { string, number, date, object } = require("yup");
 const { createUser } = require("../services/user.service");
 const CustomApiErrorMessage = require("../errors/custom-error-message");
 const { loginWithEmailAndPassword, verifyJwtToken, createJwtToken } = require("../services/auth.service");
