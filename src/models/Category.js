@@ -1,24 +1,25 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('./plugins');
 
 const categorySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'Please add category name']
     },
     description: String,
-    parentCategory: {
+    parent_category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
+        ref: 'Category',
+        default: null
+
     },
 },
     {
         timestamps: true // Enable timestamps option
     }
 );
+categorySchema.plugin(toJSON);
+categorySchema.plugin(paginate);
 
 const Category = mongoose.model('Category', categorySchema);
 

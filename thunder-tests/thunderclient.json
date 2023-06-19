@@ -44,7 +44,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2023-06-15T07:12:15.265Z",
-    "modified": "2023-06-15T12:17:03.436Z",
+    "modified": "2023-06-19T07:46:34.968Z",
     "headers": [],
     "params": [],
     "body": {
@@ -58,6 +58,10 @@
         {
           "name": "password",
           "value": "asdfgh"
+        },
+        {
+          "name": "parent_category",
+          "value": "asdkajsdklas"
         }
       ]
     },
@@ -124,5 +128,115 @@
         "value": "{{access_token}}"
       }
     ]
+  },
+  {
+    "_id": "86fcc7aa-1bd7-4f02-90c3-86cd3037ed0c",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "433acf65-8e5c-483d-917a-53f9ca898608",
+    "name": "add category",
+    "url": "{{base_url}}/api/v1/category",
+    "method": "POST",
+    "sortNum": 60000,
+    "created": "2023-06-19T07:09:36.376Z",
+    "modified": "2023-06-19T09:02:50.692Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "name",
+          "value": "vehicles"
+        },
+        {
+          "name": "description",
+          "value": "nai"
+        },
+        {
+          "name": "parent_category",
+          "value": ""
+        }
+      ]
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e0cb59e8-3a3b-4f2f-8de2-268ba03b65e2",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "e10934f6-0be6-4ea7-9e79-cc1772684c66",
+    "name": "add product",
+    "url": "{{base_url}}/api/v1/product",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-06-19T10:22:32.485Z",
+    "modified": "2023-06-19T13:36:07.944Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "name",
+          "value": "vehicles"
+        },
+        {
+          "name": "description",
+          "value": "nai"
+        },
+        {
+          "name": "parent_category",
+          "value": ""
+        },
+        {
+          "name": "tags",
+          "value": "[ \" earphone\",\"mike\" ]"
+        },
+        {
+          "name": "category_id",
+          "value": "fhahsdhoiasopdj"
+        },
+        {
+          "name": "variant_name",
+          "value": "basic"
+        },
+        {
+          "name": "variant_color",
+          "value": "red"
+        },
+        {
+          "name": "variant_size",
+          "value": "99"
+        },
+        {
+          "name": "variant_stock",
+          "value": "100"
+        },
+        {
+          "name": "variant_price",
+          "value": "599"
+        }
+      ],
+      "files": [
+        {
+          "name": "variant_images",
+          "value": "../../../../Downloads/react _state.png"
+        },
+        {
+          "name": "variant_images",
+          "value": "../../../../Downloads/assign.png"
+        }
+      ]
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": []
   }
 ]

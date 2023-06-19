@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const CustomApiErrorMessage = require("../errors/custom-error-message");
-const { authController, userController } = require("../controllers");
+const { authController, userController, categoryController, productController } = require("../controllers");
 const checkAuth = require("../middlewere/check-auth");
 
 const authRouter = Router()
@@ -16,5 +16,12 @@ authRouter.post('/refresh-token', authController.refreshToken)
 mainRouter.use(checkAuth)
 
 mainRouter.get('/user', userController.getProfile)
+
+//category
+mainRouter.post('/category', categoryController.addCategory)
+
+
+//product
+mainRouter.post('/product', productController.addProduct)
 
 module.exports = { authRouter, mainRouter }

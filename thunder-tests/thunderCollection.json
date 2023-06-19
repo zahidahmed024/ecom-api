@@ -18,6 +18,20 @@
         "containerId": "",
         "created": "2023-06-15T09:08:48.461Z",
         "sortNum": 20000
+      },
+      {
+        "_id": "433acf65-8e5c-483d-917a-53f9ca898608",
+        "name": "category",
+        "containerId": "",
+        "created": "2023-06-19T07:09:18.537Z",
+        "sortNum": 30000
+      },
+      {
+        "_id": "e10934f6-0be6-4ea7-9e79-cc1772684c66",
+        "name": "product",
+        "containerId": "",
+        "created": "2023-06-19T10:22:26.033Z",
+        "sortNum": 40000
       }
     ]
   }
