@@ -6,3 +6,5 @@ pre('findOneAndUpdate')
 pre('findOneAndDelete')
 
 
+use express mogo sanitize
+

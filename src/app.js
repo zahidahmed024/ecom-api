@@ -38,6 +38,7 @@ app.use(mongoSanitize());
 app.use(express.json());
 app.use(express.static('./public'));
 app.use(fileUpload());
+app.use(express.urlencoded({ extended: true }));
 
 //using app routers
 app.use('/api/v1', [authRouter, mainRouter]);

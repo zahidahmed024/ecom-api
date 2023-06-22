@@ -39,17 +39,17 @@ const productSchema = new mongoose.Schema({
         timestamps: true // Enable timestamps option
     }
 );
-productSchema.pre('validate', async function (next) {
-    const user = this;
+// productSchema.pre('validate', async function (next) {
+//     const user = this;
 
-    try {
+//     try {
 
 
-        next();
-    } catch (err) {
-        next(err);
-    }
-})
+//         next();
+//     } catch (err) {
+//         next(err);
+//     }
+// })
 
 productSchema.plugin(toJSON);
 productSchema.plugin(paginate);
