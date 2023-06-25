@@ -138,7 +138,7 @@
     "method": "POST",
     "sortNum": 60000,
     "created": "2023-06-19T07:09:36.376Z",
-    "modified": "2023-06-19T09:02:50.692Z",
+    "modified": "2023-06-25T12:05:48.353Z",
     "headers": [],
     "params": [],
     "body": {
@@ -147,7 +147,7 @@
       "form": [
         {
           "name": "name",
-          "value": "vehicles"
+          "value": "new col"
         },
         {
           "name": "description",
@@ -174,7 +174,7 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-06-19T10:22:32.485Z",
-    "modified": "2023-06-22T10:04:48.109Z",
+    "modified": "2023-06-25T12:09:52.927Z",
     "headers": [],
     "params": [],
     "body": {
@@ -190,8 +190,8 @@
           "value": "nai"
         },
         {
-          "name": "category_id",
-          "value": "fhahsdhoiasopdj1231"
+          "name": "category",
+          "value": "64982d9ce81f0e49bb639d2d"
         },
         {
           "name": "variant_name",
@@ -215,15 +215,11 @@
         },
         {
           "name": "display_status",
-          "value": "123"
+          "value": "hide"
         },
         {
           "name": "tags",
-          "value": "zahidd"
-        },
-        {
-          "name": "tags",
-          "value": "ahmed"
+          "value": "[\"zahid\",\"ahmed\"]"
         }
       ],
       "files": [
@@ -233,7 +229,7 @@
         },
         {
           "name": "variant_images",
-          "value": "../../../../Downloads/assign.png"
+          "value": "../../../../Downloads/switch.png"
         }
       ]
     },

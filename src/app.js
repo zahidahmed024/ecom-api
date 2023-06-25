@@ -12,6 +12,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
+var path = require('path');
 
 
 //  routers
@@ -36,9 +37,13 @@ app.use(xss());
 app.use(mongoSanitize());
 
 app.use(express.json());
-app.use(express.static('./public'));
-app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(fileUpload({
+  // useTempFiles: true,
+  createParentPath: true,
+}));
+
 
 //using app routers
 app.use('/api/v1', [authRouter, mainRouter]);
@@ -46,5 +51,5 @@ app.use('/api/v1', [authRouter, mainRouter]);
 app.use(errorHandlerMiddleware);
 
 
-
+// console.log(path.join(__dirname, '../public'))
 module.exports = app;

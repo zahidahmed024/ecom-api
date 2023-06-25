@@ -4,7 +4,7 @@ const { createProduct } = require("../services/product.service");
 
 
 const addProduct = catchAsync(async (req, res, next) => {
-    let product = await createProduct(req.body, req.files)
+    let product = await createProduct(req)
 
     return res.status(200).send({
         message: 'product Created successfully',

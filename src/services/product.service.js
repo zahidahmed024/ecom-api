@@ -1,20 +1,27 @@
-const Product = require('../models/Product');
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const { Product } = require('../models/Product');
+
+const { promisify } = require('util');
+
 const CustomValidationError = require('../errors/custom-validation-error');
 const CustomApiErrorMessage = require('../errors/custom-error-message');
 const { formatYupErrors, formatJoiErrors } = require('../utils/formatYupErrors');
 const Joi = require('joi');
+const { compressAndMoveImage } = require('../utils/compressAndMoveImage');
 
 // Create a new product
-async function createProduct(formInputs, files) {
-    // let { name, description, category_id, variant_name, variant_color, variant_size, variant_stock, variant_price, tags, display_status } = formInputs
+
+async function createProduct(req) {
+    let formInputs = req.body
+    let images = req.files.variant_images
+    // console.log('files', )
     formInputs.tags = formInputs.tags ? JSON.parse(formInputs.tags) : []
+
+    let { name, description, category, variant_name, variant_color, variant_size, variant_stock, variant_price, tags, reviews, display_status } = formInputs
 
     const schema = Joi.object({
         name: Joi.string().required(),
         description: Joi.string().required(),
-        category_id: Joi.string().required(),
+        category: Joi.string().required(),
         variant_name: Joi.string().required(),
         variant_color: Joi.string().required(),
         variant_size: Joi.number().required(),
@@ -23,53 +30,55 @@ async function createProduct(formInputs, files) {
         display_status: Joi.string().required(),
         tags: Joi.array().items(Joi.string()).default(null)
     });
-    // let parsedTags = JSON.parse(tags)
-    // console.log('tags', typeof parsedTags)
 
     const result = schema.validate(formInputs, {
         abortEarly: false,
     });
     if (result?.error) throw new CustomValidationError(400, formatJoiErrors(result.error))
 
-    return result
-    // return {
-    //     // name, description, category_id, variant_name, variant_color, variant_size, variant_stock, variant_price, tags
-    // }
+    //image section
+    let modifiedImageUrls
+    if (Array.isArray(images)) {
+        // console.log('images', images)
+        const promises = images.map(item => compressAndMoveImage(item));
+        const hostUrl = `${req.connection.encrypted ? 'https' : 'http'}://${req.headers.host}`;
+        let result = await Promise.all(promises);
+        modifiedImageUrls = result.map(item => `${hostUrl}/${item}`)
+    }
+    
+    let modifiedFormInputs = {
+        name,
+        description,
+        category,
+        tags: formInputs.tags,
+        reviews,
+        variants: {
+            name: variant_name,
+            color: variant_color,
+            price: variant_price,
+            size: variant_size,
+            stock: variant_stock,
+            images: modifiedImageUrls
+        },
+        display_status
 
-    // let errors = {}
-    // const product = new Product(productData);
-    // // if (!imageFile),{
-    // //     errors.image = 'Image is required'
-    // //     throw new CustomValidationError(422, errors, 'validation error')
-    // // }
+    }
 
-    // const fileName = generateFileName(imageFile);
-    // const filePath = `uploads/${fileName}`;
-    // await saveFile(imageFile, filePath);
-    // product.image = fileName;
-    // const savedProduct = await product.save();
-    // return savedProduct;
+    let product = await Product.create(modifiedFormInputs)
+    // console.log(product)
+
+
+    return product
 
 }
 
-// Generate a unique filename for the uploaded file
-// function generateFileName(file) {
-//     const extension = file.name.split('.').pop();
-//     return `${uuidv4()}.${extension}`;
-// }
 
-// // Save the uploaded file to disk
-// function saveFile(file, filePath) {
-//     return new Promise((resolve, reject) => {
-//         file.mv(filePath, (err) => {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve();
-//             }
-//         });
-//     });
-// }
+
+
+
+
+
+
 
 module.exports = {
     createProduct
