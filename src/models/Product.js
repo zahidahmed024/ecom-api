@@ -1,7 +1,16 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-
+const variantSchema = new mongoose.Schema({
+    color: { type: String, required: true },
+    name: { type: String, required: true },
+    size: { type: String, required: true },
+    stock: { type: Number, required: true },
+    price: { type: Number, required: true },
+    images: [
+        { type: String, required: true }
+    ],
+},)
 // Define the Product Schema
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -19,18 +28,7 @@ const productSchema = new mongoose.Schema({
         ref: 'Category',
         // required: [true]
     },
-    variants: [
-        {
-            color: { type: String, required: true },
-            name: { type: String, required: true },
-            size: { type: String, required: true },
-            stock: { type: Number, required: true },
-            price: { type: Number, required: true },
-            images: [
-                { type: String, required: true }
-            ]
-        }
-    ],
+    variants: [variantSchema],
     display_status: { type: String, enum: ['show', 'hide'], default: 'hide' }
 
 },
@@ -51,6 +49,7 @@ const productSchema = new mongoose.Schema({
 //     }
 // })
 
+variantSchema.plugin(toJSON);
 productSchema.plugin(toJSON);
 productSchema.plugin(paginate);
 

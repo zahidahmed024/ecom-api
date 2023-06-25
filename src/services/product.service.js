@@ -37,20 +37,24 @@ async function createProduct(req) {
     if (result?.error) throw new CustomValidationError(400, formatJoiErrors(result.error))
 
     //image section
-    let modifiedImageUrls
+    let modifiedImageUrls = []
+    //host url
+    const hostUrl = `${req.connection.encrypted ? 'https' : 'http'}://${req.headers.host}`;
+
     if (Array.isArray(images)) {
-        // console.log('images', images)
         const promises = images.map(item => compressAndMoveImage(item));
-        const hostUrl = `${req.connection.encrypted ? 'https' : 'http'}://${req.headers.host}`;
         let result = await Promise.all(promises);
-        modifiedImageUrls = result.map(item => `${hostUrl}/${item}`)
+        result.forEach(item => modifiedImageUrls.push(`${hostUrl}/${item}`))
+    } else if (images) {
+        let result = await compressAndMoveImage(images)
+        modifiedImageUrls.push(`${hostUrl}/${result}`)
     }
-    
+
     let modifiedFormInputs = {
         name,
         description,
         category,
-        tags: formInputs.tags,
+        tags: tags,
         reviews,
         variants: {
             name: variant_name,

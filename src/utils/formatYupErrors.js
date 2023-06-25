@@ -11,7 +11,9 @@ module.exports.formatYupErrors = function name(errors) {
 module.exports.formatJoiErrors = function name(errors) {
     let modifiedErrors = {}
     errors.details.map(item => {
-        modifiedErrors[item.context.key] = item.message
+        modifiedErrors[item.context.key] = item.message.replace(/"/g, '')
+        // console.log('item.message', item)
     })
+    // console.log('errors', errors)
     return modifiedErrors
 }
