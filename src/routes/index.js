@@ -23,5 +23,7 @@ mainRouter.post('/category', categoryController.addCategory)
 
 //product
 mainRouter.post('/product', productController.addProduct)
+mainRouter.get('/product', productController.getProduct)
+mainRouter.delete('/product/:id', productController.removeProduct)
 
 module.exports = { authRouter, mainRouter }

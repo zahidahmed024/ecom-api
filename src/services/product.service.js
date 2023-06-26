@@ -7,10 +7,12 @@ const CustomApiErrorMessage = require('../errors/custom-error-message');
 const { formatYupErrors, formatJoiErrors } = require('../utils/formatYupErrors');
 const Joi = require('joi');
 const { compressAndMoveImage } = require('../utils/compressAndMoveImage');
+const { insertProductSchema } = require('../utils/joiSchemas');
 
 // Create a new product
 
-async function createProduct(req) {
+module.exports.createProduct = async (req) => {
+
     let formInputs = req.body
     let images = req.files.variant_images
     // console.log('files', )
@@ -18,20 +20,8 @@ async function createProduct(req) {
 
     let { name, description, category, variant_name, variant_color, variant_size, variant_stock, variant_price, tags, reviews, display_status } = formInputs
 
-    const schema = Joi.object({
-        name: Joi.string().required(),
-        description: Joi.string().required(),
-        category: Joi.string().required(),
-        variant_name: Joi.string().required(),
-        variant_color: Joi.string().required(),
-        variant_size: Joi.number().required(),
-        variant_stock: Joi.number().required(),
-        variant_price: Joi.number().required(),
-        display_status: Joi.string().required(),
-        tags: Joi.array().items(Joi.string()).default(null)
-    });
 
-    const result = schema.validate(formInputs, {
+    const result = insertProductSchema.validate(formInputs, {
         abortEarly: false,
     });
     if (result?.error) throw new CustomValidationError(400, formatJoiErrors(result.error))
@@ -67,13 +57,25 @@ async function createProduct(req) {
         display_status
 
     }
-
     let product = await Product.create(modifiedFormInputs)
-    // console.log(product)
-
 
     return product
+}
 
+// get all products
+module.exports.getAllProduct = async () => {
+    let allProduct = await Product.find({})
+    return allProduct
+}
+
+
+// delete products
+module.exports.deleteProduct = async (id) => {
+    if (!id) {
+        throw new CustomApiErrorMessage(500, 'Please provice product id')
+    }
+    let deletedProduct = await Product.findByIdAndRemove(id)
+    return deletedProduct
 }
 
 
@@ -82,8 +84,3 @@ async function createProduct(req) {
 
 
 
-
-
-module.exports = {
-    createProduct
-};
