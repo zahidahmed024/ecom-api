@@ -20,7 +20,6 @@ module.exports.createProduct = async (req) => {
 
     let { name, description, category, variant_name, variant_color, variant_size, variant_stock, variant_price, tags, reviews, display_status } = formInputs
 
-
     const result = insertProductSchema.validate(formInputs, {
         abortEarly: false,
     });
@@ -60,6 +59,19 @@ module.exports.createProduct = async (req) => {
     let product = await Product.create(modifiedFormInputs)
 
     return product
+}
+
+//update product details name description tags review display status
+module.exports.updateProductDetails = async (product_id, inputs) => {
+    let { name, description, category, tags, reviews, display_status } = inputs
+    let result = Product.findByIdAndUpdate(product_id, inputs, { new: true, runValidators: true })
+    return result
+}
+
+//update product variant
+module.exports.updateProductVariant = async (inputs) => {
+    let { variant_name, variant_color, variant_price, variant_size, variant_stock, modifiedImageUrls } = inputs
+
 }
 
 // get all products

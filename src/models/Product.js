@@ -13,9 +13,10 @@ const variantSchema = new mongoose.Schema({
 },)
 // Define the Product Schema
 const productSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
+    name: { type: String, required: [true, 'Product name is required'] },
+    description: { type: String, required: [true, 'Product description is required'] },
     tags: [String],
+    // brand: add brand
     reviews: [
         {
             user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },

@@ -274,5 +274,95 @@
       "bearer": "{{access_token}}"
     },
     "tests": []
+  },
+  {
+    "_id": "3e10e040-4871-417b-b041-d4fe359f784e",
+    "colId": "67d43280-7c83-41e4-9a53-a9004870a2f3",
+    "containerId": "e10934f6-0be6-4ea7-9e79-cc1772684c66",
+    "name": "edit",
+    "url": "{{base_url}}/api/v1/product?product_id=64982e9086dd937ca6d51d2b&variant_id=",
+    "method": "PUT",
+    "sortNum": 25000,
+    "created": "2023-06-26T10:03:12.839Z",
+    "modified": "2023-06-26T11:58:35.745Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "product_id",
+        "value": "64982e9086dd937ca6d51d2b",
+        "isPath": false
+      },
+      {
+        "name": "variant_id",
+        "value": "",
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "name",
+          "value": "new updated vehicles"
+        },
+        {
+          "name": "description",
+          "value": "afasd"
+        },
+        {
+          "name": "category",
+          "value": "64982d9ce81f0e49bb639d2d"
+        },
+        {
+          "name": "variant_name",
+          "value": "basic",
+          "isDisabled": true
+        },
+        {
+          "name": "variant_color",
+          "value": "12312",
+          "isDisabled": true
+        },
+        {
+          "name": "variant_size",
+          "value": "32",
+          "isDisabled": true
+        },
+        {
+          "name": "variant_stock",
+          "value": "123",
+          "isDisabled": true
+        },
+        {
+          "name": "variant_price",
+          "value": "599",
+          "isDisabled": true
+        },
+        {
+          "name": "display_status",
+          "value": "hide"
+        },
+        {
+          "name": "tags",
+          "value": "[\"zahid,\"ahmed\"]"
+        }
+      ],
+      "files": [
+        {
+          "name": "variant_images",
+          "value": "../../../../Downloads/react _state.png"
+        },
+        {
+          "name": "variant_images",
+          "value": "../../../../Downloads/switch.png"
+        }
+      ]
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{access_token}}"
+    },
+    "tests": []
   }
 ]
